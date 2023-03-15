@@ -1,0 +1,20 @@
+1.Kodemelwar Koustubh
+Class: SE Divsion: A Roll No. : 1
+FDS: 39 CG: 66 OOP: 78 DELD: 89 DM: 22 Percentage: 65
+
+
+2.Kulkarni Rugved
+Class: SE Divsion: A Roll No. : 2
+FDS: 44 CG: 90 OOP: 56 DELD: 77 DM: 99 Percentage: 99
+
+
+3.Patil Om
+Class: SE Divsion: A Roll No. : 3
+FDS: 56 CG: 77 OOP: 43 DELD: 90 DM: 45 Percentage: 55
+
+
+4.Patil Vedant
+Class: SE Divsion: A Roll No. : 4
+FDS: 88 CG: 23 OOP: 56 DELD: 77 DM: 87 Percentage: 66
+
+

@@ -21,9 +21,9 @@ class Div_A:public Student
     int percentage;
     
     
-        //This is the default constructor setting division and class of the student and assigning marks to zero or null.
     Div_A()
     {
+        //This is the default constructor setting division and class of the student and assigning marks to zero or null.
         count_a++;
         cls = "SE";
         div = "A";
@@ -31,9 +31,9 @@ class Div_A:public Student
         fds = cg = oop = dm = deld = percentage = 0;
     }
     
-        //This function gives the basic data of the student.
     void get_data()
     {
+        //This function gives the basic data of the student.
         cout<<full_name<<endl;
         cout<<cls<<endl;
         cout<<div<<endl;
@@ -686,7 +686,7 @@ void search_student()
 {   
     string name;
     int found = 0;
-    cout<<"Enter the full name of the student (Surname FirstName): ";
+    cout<<"Enter the full name of the student: ";
     cin.ignore();
     getline(cin,name);
     for(int i = 1;i<=Div_A::count_a;i++)
@@ -701,7 +701,7 @@ void search_student()
                     break;
                 }
     }
-    if (found == 0)
+    if (found = 0)
     {
         cout<<"Student not found"<<endl;
     }

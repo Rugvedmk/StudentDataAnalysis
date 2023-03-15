@@ -701,7 +701,7 @@ void search_student()
                     break;
                 }
     }
-    if (found = 0)
+    if (found == 0)
     {
         cout<<"Student not found"<<endl;
     }

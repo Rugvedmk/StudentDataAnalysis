@@ -21,19 +21,19 @@ class Div_A:public Student
     int percentage;
     
     
+        //This is the default constructor setting division and class of the student and assigning marks to zero or null.
     Div_A()
     {
-        //This is the default constructor setting division and class of the student and assigning marks to zero or null.
         count_a++;
         cls = "SE";
         div = "A";
         roll_no = count_a;
-        fds = cg = oop = dm = deld = percentage = NULL;
+        fds = cg = oop = dm = deld = percentage = 0;
     }
     
+        //This function gives the basic data of the student.
     void get_data()
     {
-        //This function gives the basic data of the student.
         cout<<full_name<<endl;
         cout<<cls<<endl;
         cout<<div<<endl;
@@ -52,10 +52,10 @@ class Div_A:public Student
     void set_marks(Div_A*);
 }*A[100],*A_aggre[100],*A_fds[100],*A_cg[100],*A_deld[100],*A_dm[100],*A_oop[100],*A_temp[100]; 
 
-void setdata()
-{
     //This function sorts the student according to their names in assending order.
     //We have used insertion sort algorithm in it.
+void setdata()
+{
     for(int i = 1;i<=Div_A::count_a;i++)
     {
             Div_A *temp1,*temp2;
@@ -79,6 +79,7 @@ void setdata()
         }
 }
 
+    //Writes the data into raw text file in order to save it
 void write()
 {
     ofstream file("raw.txt", ios::out);
@@ -96,9 +97,9 @@ void write()
     }
 }
 
+    //Reads the raw data from the file and restores with when the programme is run
 void read()
 {
-
     string a;
     int num;
 
@@ -134,9 +135,9 @@ void read()
     }
 }
 
+    //In this function we create 2 text files  from which one takes the entry of the new students then it copies into the main
 void student_data()
 {   
-    //In this function we create 2 text files  from which one takes the entry of the new students then it copies into the main
     ofstream f3;
     f3.open("Student_data.txt", ios::out);
     for(int i=1; i <= Div_A ::count_a; i++)
@@ -148,6 +149,8 @@ void student_data()
         f3 << "\n";
     }
 }  
+
+    //Checks wether the input is valid or not
 int er_handler(int* marks)
 {
     try{
@@ -196,9 +199,9 @@ void Div_A :: set_marks(Div_A* temp1)
     count_temp++;
 }
 
+    //In this function we create data files for storing the marks of all the subjects
 void w_marks()
 {   
-    //In this function we create data files for storing the marks of all the subjects
 
     ofstream file1("FDS.txt", ios::out);
     for(int i = 0;i<Div_A::count_a_m;i++)
@@ -252,6 +255,8 @@ int Div_A :: count_a_deld;//keeps the count of students in the sorted marks list
 int Div_A :: count_a_oop;//keeps the count of students in the sorted marks list of OOP
 int Div_A :: count_a_dm;//keeps the count of students in the sorted marks list of DM
 
+
+    //Sorts the student percent in descending order
 void A_sortpercent(){
     Div_A *temp1,*temp2;
     
@@ -360,6 +365,7 @@ void A_sortpercent(){
     Div_A::count_temp = 0;
 }
 
+    //Function to draw solid rectangular graph
 void solid_rect(int arg1,int arg2){
     int num1 = arg1,num2 = arg2;
     for (int i = 0; i < 11; i++)
@@ -370,6 +376,7 @@ void solid_rect(int arg1,int arg2){
     }
 }
 
+    //Function to draw graph
 void draw(int count_g,int count_av,int count_p)
 {       
     int total = count_g + count_p + count_av;
@@ -451,6 +458,7 @@ void draw(int count_g,int count_av,int count_p)
 
 }
 
+    //Function to give choice and set proper arguments for draw() function
 void graph()
 {   
     cout<<"Do you want graphical analysis for aggreate marks or specific subject :"<<endl;
@@ -597,12 +605,13 @@ void graph()
             count_av = 0;
             count_p = 0;
         }
-}
+    }
 }
 
+
+    //This function opens the data file where all the entries of students are stored and it sorts them according to their surnames and displays the sorted list
 void display_data()
 {
-    //This function opens the data file where all the entries of students are stored and it sorts them according to their surnames and displays the sorted list
     cout<<"Following is the list of the students present in Class: \n";
     for(int i=1; i <= Div_A ::count_a; i++)
     {
@@ -614,9 +623,9 @@ void display_data()
 
 }
 
+    //This function asks the user for which student you want to enter the marks and checks if it present in the list, if it is then it will call the set_marks() function
 void mark_entry()
 {
-    //This function asks the user for which student you want to enter the marks and checks if it present in the list, if it is then it will call the set_marks() function
     string name;
     Div_A::count_a_s++;
     cout<<"Enter the full name of which marks you want to set : ";
@@ -632,9 +641,9 @@ void mark_entry()
             }
 }
 
+    //This function asks the user for which subject or aggreagate it wants and displays the required choice
 void topper()
 {
-    //This function asks the user for which subject or aggreagate it wants and displays the required choice
     int c;
     cout<<"\n1.Overall Percentage Topper \n2.FDS Topper \n3.CG Topper \n4.OOP Topper \n5.DELD Topper \n6.DM Topper\n7.Exit"<<endl;
     cout<<"Enter your choice: ";
@@ -671,17 +680,20 @@ void topper()
             break;
     }
 }
+
+    //This function searches the student and if it is found in the student data then displays the student's data
 void search_student()
 {   
-    //This function searches the student and if it is found in the student data then displays the student's data
     string name;
-    cout<<"Enter the full name of the student: ";
+    int found = 0;
+    cout<<"Enter the full name of the student (Surname FirstName): ";
     cin.ignore();
     getline(cin,name);
     for(int i = 1;i<=Div_A::count_a;i++)
     {
                 if (A[i]->full_name == name)
-                {
+                {   
+                    found = 1;
                     cout<<"Student's Data: "<<endl;
                     cout << A[i]->full_name<<endl;
                     cout << "Class: " << A[i]->cls << " Divsion: " << A[i]->div << " Roll No. : " << A[i]->roll_no<<endl; 
@@ -689,8 +701,14 @@ void search_student()
                     break;
                 }
     }
-    cout<<"Student not found"<<endl;
+    if (found = 0)
+    {
+        cout<<"Student not found"<<endl;
+    }
+    
 }
+
+
 int main(){
     read();
     A_sortpercent();

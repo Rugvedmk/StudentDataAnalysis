@@ -205,20 +205,6 @@ void Div_A :: set_marks(Div_A* temp1, int choice_update)// 0 means the marks are
     }
     else
     {   
-        // int previousPercentChoice;
-        // if (percentage >= 80)
-        // {
-        //     previousPercentChoice = 1;
-        // }
-        // else if (percentage <= 40)
-        // {
-        //     previousPercentChoice = 2;
-        // }
-        // else
-        // {
-        //     previousPercentChoice = 3;
-        // }
-
         if (percentage >= 80){
             count_good--;
         }
@@ -240,17 +226,6 @@ void Div_A :: set_marks(Div_A* temp1, int choice_update)// 0 means the marks are
         else{
             count_avg++;
         }
-
-        // if (previousPercentChoice == 1){
-        //     count_good--;
-        // }
-        // else if (previousPercentChoice == 2){
-        //     count_poor--;
-        // }
-        // else{
-        //     count_avg--;
-        // }
-
     }
 }
 

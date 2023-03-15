@@ -1,20 +1,20 @@
-1.Kodemelwar Koustubh
+1.Morya Harsh
 Class: SE Divsion: A Roll No. : 1
-FDS: 39 CG: 66 OOP: 78 DELD: 89 DM: 22 Percentage: 65
+FDS: 25 CG: 66 OOP: 35 DELD: 10 DM: 15 Percentage: 30
 
 
-2.Kulkarni Rugved
+2.Sharma Ram
 Class: SE Divsion: A Roll No. : 2
-FDS: 44 CG: 90 OOP: 56 DELD: 77 DM: 99 Percentage: 99
+FDS: 95 CG: 78 OOP: 88 DELD: 85 DM: 77 Percentage: 84
 
 
-3.Patil Om
+3.Sing Sarvesh
 Class: SE Divsion: A Roll No. : 3
-FDS: 56 CG: 77 OOP: 43 DELD: 90 DM: 45 Percentage: 55
+FDS: 55 CG: 68 OOP: 30 DELD: 79 DM: 77 Percentage: 61
 
 
-4.Patil Vedant
+4.Yadav Arjun
 Class: SE Divsion: A Roll No. : 4
-FDS: 88 CG: 23 OOP: 56 DELD: 77 DM: 87 Percentage: 66
+FDS: 70 CG: 65 OOP: 78 DELD: 80 DM: 70 Percentage: 72
 
 

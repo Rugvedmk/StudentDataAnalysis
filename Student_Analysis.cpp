@@ -31,25 +31,25 @@ class Div_A:public Student
         fds = cg = oop = dm = deld = percentage = 0;
     }
     
+        //This function gives the basic data of the student.
     void get_data()
     {
-        //This function gives the basic data of the student.
         cout<<full_name<<endl;
         cout<<cls<<endl;
         cout<<div<<endl;
         cout<<roll_no<<endl;
     }
     
+        //In this function the basic data of the function is set.
     void set_data()
     {
-        //In this function the basic data of the function is set.
         cout<<"Enter first name : ";
         cin>>first_name;
         cout<<"Enter last name : ";
         cin>>last_name;
         full_name = last_name + " " + first_name;
     }
-    void set_marks(Div_A*);
+    void set_marks(Div_A* , int choice_update);
 }*A[100],*A_aggre[100],*A_fds[100],*A_cg[100],*A_deld[100],*A_dm[100],*A_oop[100],*A_temp[100]; 
 
     //This function sorts the student according to their names in assending order.
@@ -167,7 +167,7 @@ int er_handler(int* marks)
     return *marks;
 }
 
-void Div_A :: set_marks(Div_A* temp1)
+void Div_A :: set_marks(Div_A* temp1, int choice_update)// 0 means the marks are entered for the 1st time
 {
     cout<<"Enter marks of "<<full_name<<" roll number "<<roll_no<<endl;
     cout<<"Enter marks out of 100 "<<endl;
@@ -185,18 +185,73 @@ void Div_A :: set_marks(Div_A* temp1)
     er_handler(&oop);
     cout<<"DM :";
     cin>>dm;
-    percentage = float((fds+cg+deld+oop+dm)*0.2);
-    if (percentage >= 80){
-        count_good++;
+    
+    if(choice_update == 0){
+
+        percentage = float((fds+cg+deld+oop+dm)*0.2);
+
+        if (percentage >= 80){
+            count_good++;
+        }
+        else if (percentage <= 40){
+            count_poor++;
+        }
+        else{
+            count_avg++;
+        }
+
+        A_temp[count_temp] = temp1;
+        count_temp++;
     }
-    else if (percentage <= 40){
-        count_poor++;
+    else
+    {   
+        // int previousPercentChoice;
+        // if (percentage >= 80)
+        // {
+        //     previousPercentChoice = 1;
+        // }
+        // else if (percentage <= 40)
+        // {
+        //     previousPercentChoice = 2;
+        // }
+        // else
+        // {
+        //     previousPercentChoice = 3;
+        // }
+
+        if (percentage >= 80){
+            count_good--;
+        }
+        else if (percentage <= 40){
+            count_poor--;
+        }
+        else{
+            count_avg--;
+        }
+
+        percentage = float((fds+cg+deld+oop+dm)*0.2);
+
+        if (percentage >= 80){
+            count_good++;
+        }
+        else if (percentage <= 40){
+            count_poor++;
+        }
+        else{
+            count_avg++;
+        }
+
+        // if (previousPercentChoice == 1){
+        //     count_good--;
+        // }
+        // else if (previousPercentChoice == 2){
+        //     count_poor--;
+        // }
+        // else{
+        //     count_avg--;
+        // }
+
     }
-    else{
-        count_avg++;
-    }
-    A_temp[count_temp] = temp1;
-    count_temp++;
 }
 
     //In this function we create data files for storing the marks of all the subjects
@@ -628,15 +683,32 @@ void mark_entry()
 {
     string name;
     Div_A::count_a_s++;
-    cout<<"Enter the full name of which marks you want to set : ";
+    cout<<"Enter the full name of which marks you want to set (Surname FirstName): ";
             cin.ignore();
             getline(cin,name);
             
             for(int i = 1;i<=Div_A::count_a;i++){
                 if (A[i]->full_name == name)
-                {
-                    A[i]->set_marks(A[i]);
-                    break;
+                {   
+                    if (A[i]->fds == 0 && A[i]->cg == 0 && A[i]->oop == 0 && A[i]->dm == 0 && A[i]->deld == 0)
+                    {
+                        A[i]->set_marks(A[i], 0);
+                        break;
+                    } else 
+                    {
+                        int choice_update = 0;
+                        cout<<"The marks are already set do you want to update marks?"<<endl;
+                        cout<<"Press 1 for yes and 0 for no : ";
+                        cin>>choice_update;
+                        cout<<endl;
+                        if (choice_update == 1)
+                        {
+                            A[i]->set_marks(A[i],1);
+                            break;        
+                        }
+                        
+                    } 
+                    
                 }
             }
 }
@@ -708,14 +780,37 @@ void search_student()
     
 }
 
+void dltData()
+{
+    ofstream file("raw.txt", ios::out);
+    file << "0" << endl;
+    Div_A :: count_a = Div_A :: count_a_m = Div_A :: count_poor = Div_A :: count_avg = 
+    Div_A :: count_good = Div_A :: count_temp = Div_A :: count_a_s = Div_A :: count_a_fds = 
+    Div_A :: count_a_cg = Div_A :: count_a_deld = Div_A :: count_a_oop = Div_A :: count_a_dm = 0;
+
+    file.close();
+
+    delete[] A[100];
+    delete[] A_aggre[100];
+    delete[] A_fds[100];
+    delete[] A_cg[100];
+    delete[] A_deld[100];
+    delete[] A_dm[100];
+    delete[] A_oop[100];
+    delete[] A_temp[100];
+
+    read();
+}
 
 int main(){
     read();
     A_sortpercent();
     int ch;
+    int checkSure;
     do {
     cout<<"\n-------------------------------------------------------------------------------------------"<<endl;
-    cout<<"\n1.Create a new entry \n2.View Student Data \n3.Graphical Representation \n4.Enter marks\n5.Save Data\n6.Topper \n7.Search a Student \n8.Exit";
+    cout<<"\n1.Create a new entry \n2.View Student Data \n3.Graphical Representation \n4.Enter marks\n5.Save Data";
+    cout<<"\n6.Topper \n7.Search a Student \n8.To delete all data \n9.Exit";
     cout<<"\nSelect your option: ";
     cin>>ch;
     cout<<"-------------------------------------------------------------------------------------------"<<endl;  
@@ -750,9 +845,16 @@ int main(){
             search_student();
             break;
         case 8:
+            cout<<"Are you sure you want to delete all data?"<<endl;
+            cout<<"Press 1 for yes and 0 for no : ";
+            cin>>checkSure;
+            if (checkSure == 1)
+            {
+                dltData();
+            }        
             break;
 
     }
-    }while(ch!=8);
+    }while(ch!=9);
     return 0;
 }

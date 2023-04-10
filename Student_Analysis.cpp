@@ -229,47 +229,28 @@ void Div_A :: set_marks(Div_A* temp1, int choice_update)// 0 means the marks are
     }
 }
 
+void w_marks_template(string fileName, Div_A *typeArray[],int Div_A :: *subject){
+        
+        ofstream file(fileName, ios::out);
+        for(int i = 0;i<Div_A::count_a_m;i++)
+        {
+        file << typeArray[i]->full_name<<" : ";
+        file << typeArray[i]->*subject<<endl;
+        }
+        
+}
+
     //In this function we create data files for storing the marks of all the subjects
 void w_marks()
 {   
 
-    ofstream file1("FDS.txt", ios::out);
-    for(int i = 0;i<Div_A::count_a_m;i++)
-    {
-    file1 << A_fds[i]->full_name<<" : ";
-    file1 << A_fds[i]->fds<<endl;
-    }
+    w_marks_template("FDS.txt",A_fds,&Div_A:: fds);
+    w_marks_template("CG.txt",A_cg,&Div_A:: cg);
+    w_marks_template("DELD.txt",A_deld,&Div_A:: deld);
+    w_marks_template("OOP.txt",A_oop,&Div_A:: oop);
+    w_marks_template("DM.txt",A_dm,&Div_A:: dm);
+    w_marks_template("Overall_Percentage.txt",A_aggre,&Div_A:: percentage);
 
-    ofstream file2("CG.txt", ios::out);
-    for(int i = 0;i<Div_A::count_a_m;i++){
-    file2 << A_cg[i]->full_name<<" : ";
-    file2 << A_cg[i]->cg<<endl;
-    }
-        
-    ofstream file3("DELD.txt", ios::out);
-    for(int i = 0;i<Div_A::count_a_m;i++){
-    file3 << A_deld[i]->full_name<<" : ";
-    file3 << A_deld[i]->deld<<endl;
-    }
-
-    ofstream file4("OOP.txt", ios::out);
-    for(int i = 0;i<Div_A::count_a_m;i++){
-    file4 << A_oop[i]->full_name<<" : ";
-    file4 << A_oop[i]->oop<<endl;
-    }
-
-    ofstream file5("DM.txt", ios::out);
-    for(int i = 0;i<Div_A::count_a_m;i++){
-    file5 << A_dm[i]->full_name<<" : ";
-    file5 << A_dm[i]->dm<<endl;
-    }
-
-    ofstream file6("Overall_Percentage.txt", ios::out);
-    for(int i = 0;i<Div_A::count_a_m;i++){
-    file6 << A_aggre[i]->full_name <<" : ";
-    file6 << A_aggre[i]->percentage <<endl;
-    }
-    
 }
 
 int Div_A :: count_a;//keeps the count of new objects
@@ -285,113 +266,37 @@ int Div_A :: count_a_deld;//keeps the count of students in the sorted marks list
 int Div_A :: count_a_oop;//keeps the count of students in the sorted marks list of OOP
 int Div_A :: count_a_dm;//keeps the count of students in the sorted marks list of DM
 
+void sortTemplate(Div_A *typeArray[],int &count,int Div_A:: *subject ){
+    Div_A *temp1,*temp2;
+    
+    for (int i = 0; i <Div_A::count_temp; i++){
+        typeArray[count] = A_temp[i];
+        count++;
+        temp1 = A_temp[i];
+        for (int j = 0; j <count; j++){
+            if (temp1->*subject > typeArray[j]->*subject){
+                for (int k = j; k < count; k++){
+                    temp2 = typeArray[k];
+                    typeArray[k] = temp1;
+                    temp1 = temp2;
+                }
+                break;
+            }            
+        }
+        
+    }
+}
 
     //Sorts the student percent in descending order
 void A_sortpercent(){
     Div_A *temp1,*temp2;
     
-    for (int i = 0; i <Div_A::count_temp; i++){
-        A_aggre[Div_A::count_a_m] = A_temp[i];
-        Div_A::count_a_m++;
-        temp1 = A_temp[i];
-        for (int j = 0; j <Div_A::count_a_m; j++){
-            if (temp1->percentage > A_aggre[j]->percentage){
-                for (int k = j; k < Div_A::count_a_m; k++){
-                    temp2 = A_aggre[k];
-                    A_aggre[k] = temp1;
-                    temp1 = temp2;
-                }
-                break;
-            }
-            
-        }
-        
-    }
-    for (int i = 0; i <Div_A::count_temp; i++){
-        A_fds[Div_A::count_a_fds] = A_temp[i];
-        Div_A::count_a_fds++;
-        temp1 = A_temp[i];
-        for (int j = 0; j <Div_A::count_a_fds; j++){
-            if (temp1->fds > A_fds[j]->fds){
-                for (int k = j; k < Div_A::count_a_fds; k++){
-                    temp2 = A_fds[k];
-                    A_fds[k] = temp1;
-                    temp1 = temp2;
-                }
-                break;
-            }
-            
-        }
-        
-    }
-    for (int i = 0; i <Div_A::count_temp; i++){
-        A_cg[Div_A::count_a_cg] = A_temp[i];
-        Div_A::count_a_cg++;
-        temp1 = A_temp[i];
-        for (int j = 0; j <Div_A::count_a_cg; j++){
-            if (temp1->cg > A_cg[j]->cg){
-                for (int k = j; k < Div_A::count_a_cg; k++){
-                    temp2 = A_cg[k];
-                    A_cg[k] = temp1;
-                    temp1 = temp2;
-                }
-                break;
-            }
-            
-        }
-        
-    }
-    for (int i = 0; i <Div_A::count_temp; i++){
-        A_oop[Div_A::count_a_oop] = A_temp[i];
-        Div_A::count_a_oop++;
-        temp1 = A_temp[i];
-        for (int j = 0; j <Div_A::count_a_oop; j++){
-            if (temp1->oop > A_oop[j]->oop){
-                for (int k = j; k < Div_A::count_a_oop; k++){
-                    temp2 = A_oop[k];
-                    A_oop[k] = temp1;
-                    temp1 = temp2;
-                }
-                break;
-            }
-            
-        }
-        
-    }
-    for (int i = 0; i <Div_A::count_temp; i++){
-        A_dm[Div_A::count_a_dm] = A_temp[i];
-        Div_A::count_a_dm++;
-        temp1 = A_temp[i];
-        for (int j = 0; j <Div_A::count_a_dm; j++){
-            if (temp1->dm > A_dm[j]->dm){
-                for (int k = j; k < Div_A::count_a_dm; k++){
-                    temp2 = A_dm[k];
-                    A_dm[k] = temp1;
-                    temp1 = temp2;
-                }
-                break;
-            }
-            
-        }
-        
-    }
-    for (int i = 0; i <Div_A::count_temp; i++){
-        A_deld[Div_A::count_a_deld] = A_temp[i];
-        Div_A::count_a_deld++;
-        temp1 = A_temp[i];
-        for (int j = 0; j <Div_A::count_a_deld; j++){
-            if (temp1->deld > A_deld[j]->deld){
-                for (int k = j; k < Div_A::count_a_deld; k++){
-                    temp2 = A_deld[k];
-                    A_deld[k] = temp1;
-                    temp1 = temp2;
-                }
-                break;
-            }
-            
-        }
-        
-    }
+    sortTemplate(A_aggre,Div_A::count_a_m,&Div_A:: percentage);
+    sortTemplate(A_fds,Div_A::count_a_fds, &Div_A:: fds);
+    sortTemplate(A_cg,Div_A::count_a_cg,&Div_A:: cg);
+    sortTemplate(A_oop,Div_A::count_a_oop,&Div_A:: oop);
+    sortTemplate(A_dm,Div_A::count_a_dm,&Div_A:: dm);
+    sortTemplate(A_deld,Div_A::count_a_deld,&Div_A:: deld);
     Div_A::count_temp = 0;
 }
 
@@ -483,9 +388,29 @@ void draw(int count_g,int count_av,int count_p)
         y--;
     }
 
-    delay(1000);
+    //delay(1000);
+    cout<<"Press Enter to close graph"<<endl;
+    getch();
     closegraph();
 
+}
+
+void argumentsForGraph(int &count_g, int &count_av, int &count_p,int Div_A:: *subject){
+    for(int i = 1;i<=Div_A::count_a;i++)
+    {
+        if (A[i]->*subject > 80)
+        {
+            count_g++;
+        }
+        else if (A[i]->*subject <= 40)
+        {
+            count_p++;
+        }
+        else
+        {
+            count_av++;
+        }
+    }
 }
 
     //Function to give choice and set proper arguments for draw() function
@@ -499,21 +424,7 @@ void graph()
     int count_g = 0,count_av = 0,count_p = 0;
     if (ch == 1)
     {
-    for(int i = 1;i<=Div_A::count_a;i++)
-    {
-        if (A[i]->percentage > 80)
-        {
-            count_g++;
-        }
-        else if (A[i]->percentage <= 40)
-        {
-            count_p++;
-        }
-        else
-        {
-            count_av++;
-        }
-    }
+        argumentsForGraph(count_g, count_av, count_p,&Div_A:: percentage);
         draw( count_g, count_av, count_p);
         count_g = 0;
         count_av = 0;
@@ -527,21 +438,7 @@ void graph()
         cin>>choice;
         if (choice == 1)
         {
-            for(int i = 1;i<=Div_A::count_a;i++)
-            {
-                if (A[i]->fds > 80)
-                {
-                    count_g++;
-                }
-                else if (A[i]->fds <= 40)
-                {
-                    count_p++;
-                }
-                else
-                {
-                    count_av++;
-                }
-            }
+            argumentsForGraph(count_g, count_av, count_p,&Div_A:: fds);
             draw( count_g, count_av, count_p);
             count_g = 0;
             count_av = 0;
@@ -549,21 +446,7 @@ void graph()
         }
         if (choice == 2)
         {
-            for(int i = 1;i<=Div_A::count_a;i++)
-            {
-                if (A[i]->oop > 80)
-                {
-                    count_g++;
-                }
-                else if (A[i]->oop <= 40)
-                {
-                    count_p++;
-                }
-                else
-                {
-                    count_av++;
-                }
-            }
+            argumentsForGraph(count_g, count_av, count_p,&Div_A:: oop);
             draw( count_g, count_av, count_p);
             count_g = 0;
             count_av = 0;
@@ -571,21 +454,7 @@ void graph()
         }
         if (choice == 3)
         {
-            for(int i = 1;i<=Div_A::count_a;i++)
-            {
-                if (A[i]->cg > 80)
-                {
-                    count_g++;
-                }
-                else if (A[i]->cg <= 40)
-                {
-                    count_p++;
-                }
-                else
-                {
-                    count_av++;
-                }
-            }
+            argumentsForGraph(count_g, count_av, count_p,&Div_A:: cg);      
             draw( count_g, count_av, count_p);
             count_g = 0;
             count_av = 0;
@@ -593,21 +462,7 @@ void graph()
         }
         if (choice == 4)
         {
-            for(int i = 1;i<=Div_A::count_a;i++)
-            {
-                if (A[i]->deld > 80)
-                {
-                    count_g++;
-                }
-                else if (A[i]->deld <= 40)
-                {
-                    count_p++;
-                }
-                else
-                {
-                    count_av++;
-                }
-            }
+            argumentsForGraph(count_g, count_av, count_p,&Div_A:: deld);
             draw( count_g, count_av, count_p);
             count_g = 0;
             count_av = 0;
@@ -615,21 +470,7 @@ void graph()
         }
         if (choice == 5)
         {
-            for(int i = 1;i<=Div_A::count_a;i++)
-            {
-                if (A[i]->dm > 80)
-                {
-                    count_g++;
-                }
-                else if (A[i]->dm <= 40)
-                {
-                    count_p++;
-                }
-                else
-                {
-                    count_av++;
-                }
-            }
+            argumentsForGraph(count_g, count_av, count_p,&Div_A:: dm);
             draw( count_g, count_av, count_p);
             count_g = 0;
             count_av = 0;

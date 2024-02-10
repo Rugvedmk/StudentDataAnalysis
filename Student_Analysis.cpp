@@ -229,6 +229,8 @@ void Div_A :: set_marks(Div_A* temp1, int choice_update)// 0 means the marks are
     }
 }
 
+//This function takes the file name and array pointers declared for class Div_A (eg *A_fds[100]) and 
+//subject (fds,deld, etc) ,it is a variable name for class Div_A
 void w_marks_template(string fileName, Div_A *typeArray[],int Div_A :: *subject){
         
         ofstream file(fileName, ios::out);
@@ -266,6 +268,7 @@ int Div_A :: count_a_deld;//keeps the count of students in the sorted marks list
 int Div_A :: count_a_oop;//keeps the count of students in the sorted marks list of OOP
 int Div_A :: count_a_dm;//keeps the count of students in the sorted marks list of DM
 
+    //This function sorts Subject marks
 void sortTemplate(Div_A *typeArray[],int &count,int Div_A:: *subject ){
     Div_A *temp1,*temp2;
     
@@ -389,10 +392,11 @@ void draw(int count_g,int count_av,int count_p)
     }
 
     //delay(1000);
-    cout<<"Press Enter to close graph"<<endl;
-    getch();
+    cout<<"Please Enter C to close the graph ";
+    string closeGraph;
+    cin>>closeGraph;
+    // getch();
     closegraph();
-
 }
 
 void argumentsForGraph(int &count_g, int &count_av, int &count_p,int Div_A:: *subject){
@@ -499,7 +503,7 @@ void mark_entry()
 {
     string name;
     Div_A::count_a_s++;
-    cout<<"Enter the full name of which marks you want to set (Surname FirstName): ";
+    cout<<"Enter the full name of Student which marks you want to set (Surname FirstName): ";
             cin.ignore();
             getline(cin,name);
             
